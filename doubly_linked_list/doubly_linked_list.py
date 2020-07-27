@@ -14,8 +14,14 @@ class ListNode:
     def delete(self):
         if self.prev:
             self.prev.next = self.next
+            # alternate syntax 
+            # next_node = self.prev
+            # next_node.next = self.next
         if self.next:
             self.next.prev = self.prev
+            # alternate syntax
+            # next_node = self.next
+            # next_node.prev = self.prev
             
 """
 Our doubly-linked list class. It holds references to 
@@ -91,6 +97,8 @@ class DoublyLinkedList:
     List and inserts it as the new head node of the List.
     """
     def move_to_front(self, node):
+        if node is self.head:
+            return
         value = node.value
         self.delete(node)
         self.add_to_head(value)
@@ -100,6 +108,8 @@ class DoublyLinkedList:
     List and inserts it as the new tail node of the List.
     """
     def move_to_end(self, node):
+        if node is self.tail:
+            return
         value = node.value
         self.delete(node)
         self.add_to_tail(value)
@@ -117,7 +127,7 @@ class DoublyLinkedList:
             return
 
         # If head and tail
-        if self.head == self.tail:
+        if self.head == self.tail and node == self.head:
             self.head = None
             self.tail = None
 

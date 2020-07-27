@@ -117,6 +117,9 @@ class Node:
         self.value = value
         # reference to the next node in the list
         self.next_node = next_node
+
+    # def get_length():
+    #     return self.length
     def get_value(self):
         return self.value
     def get_next(self):
@@ -176,11 +179,11 @@ class LinkedList:
         if self.tail is None:
             return None
         elif self.head == self.tail:
-            tail_value = self.tail.get_value()
+            # tail_value = self.tail.get_value()
             self.head = None
             self.tail = None
             self.length -= 1
-            return tail_value
+            return self.tail.get_value()
         else:
             tail_value = self.tail
             cur_node = self.head
@@ -211,6 +214,16 @@ class LinkedList:
                 cur_max = cur_node.get_value()
             cur_node = cur_node.get_next()
         return cur_max
+    
+    def find_middle(self):
+        # Doing this in one pass without using the length attribute
+        mid_point = self.head
+        end_point = self.head
+        while end_point is not None or end_point.get_value()is not None:
+            print("test")
+            mid_point = mid_point.get_next()
+            end_point = end_point.get_next().get_next()
+        return mid_point.value
 
 # my_ll = LinkedList()
 # my_ll.add_to_head(2)
