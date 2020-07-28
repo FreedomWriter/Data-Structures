@@ -17,8 +17,20 @@ class BSTNode:
 
     # Insert the given value into the tree
     def insert(self, value):
-        pass
-        # cur_node = self.value
+        
+        if value < self.value:
+            # if there is already a value to the left, call insert on self.left
+            if self.left:
+                return self.left.insert(value)
+            else: # there is no value on the left, insert a new node
+                self.left = BSTNode(value)
+        else: # less than or equal to
+            if self.right: # if there is a value on the right, recursively call insert on self.right
+                return self.right.insert(value)
+            else: # no value on the right, insert a new node
+                self.right = BSTNode(value)
+
+        
         # start at root and loop until cur_node is None
             # if 'value' <= 'cur_node'
                 # if 'cur_node.left' is None
@@ -34,7 +46,7 @@ class BSTNode:
 
 
     def contains(self, target):
-        pass
+
         # compare 'target' to cur_value
             # 1. == return True
             # 2. < go left
