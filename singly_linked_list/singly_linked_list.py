@@ -212,6 +212,30 @@ class LinkedList:
             cur_node = cur_node.get_next()
         return cur_max
 
+    def find_middle(self):
+        mid_point = self.head
+        end_point = self.head
+        while end_point is not None and end_point.get_next() is not None:
+            mid_point = mid_point.get_next()
+            end_point = end_point.get_next().get_next()
+        return mid_point.value
+
+    def reverse_ll(self):
+        cur_node = self.head
+        next_node = cur_node.next_node
+        # head points to None
+        cur_node.set_next(None)
+        self.tail = cur_node
+        
+        while next_node is not None:
+            prev_node = cur_node
+            cur_node = next_node
+            next_node = cur_node.get_next()
+            next_node.set_next(prev_node)
+        self.head = cur_node
+
+        
+
 # my_ll = LinkedList()
 # my_ll.add_to_head(2)
 # # my_ll.add_to_tail(4)
