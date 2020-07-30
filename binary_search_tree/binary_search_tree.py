@@ -14,10 +14,11 @@ class BSTNode:
         self.value = value
         self.left = None
         self.right = None
+        self.size = 1 if value is not None else 0
 
     # Insert the given value into the tree
     def insert(self, value):
-        
+        self.size += 1
         if value < self.value:
             # if there is already a value to the left, call insert on self.left
             if self.left:
@@ -42,46 +43,103 @@ class BSTNode:
                     # insert our value
                 # else
                     # go right (update 'cur_node' to cur_node.right)
-        
 
 
     def contains(self, target):
-
+        if self.value == target:
+            return True
+        elif target > self.value and self.right:
+            return self.right.contains(target)
+        elif target < self.value and self.left:
+            return self.right.contains(target)
+        return False
         # compare 'target' to cur_value
             # 1. == return True
             # 2. < go left
             # 3. > go right
             # t. if can't go left/right (not found, return False)
+
+        
         
 
     # Return the maximum value found in the tree
     def get_max(self):
-        # go right until cur_node.right is None
-        pass
+        if self.value is None:
+            return None
+        # if there is a right value
+        if self.value and self.right:
+            # if the right value is larger than the value - run get_max on self.right
+            if self.value < self.right.value:
+                return self.right.get_max()
+        else:
+            return self.value
+       
+        # go right until cur_node.right is None\
 
     # Call the function `fn` on the value of each node
     def for_each(self, fn):
-        pass
+        if self.value is None:
+            return
 
-    # STRETCH - extra test - write the tests too
-    def delete(self, value):
-        pass
+        fn(self.value)
+                
+        if self.left:
+            self.left.for_each(fn)
+        if self.right:
+            self.right.for_each(fn)
+
+        # cur_node = selffn(cur_node.value)
+        # stack = # nodes you need to backtrack to
+        # while cur_node.left:
+        #     cur_node = cur_node.left
+        #     fn(cur_node)
+        #     # add it to the stack
+        # #pop off the stack
+        # # try to go right
+
+
+
 
     # Part 2 -----------------------
 
     # Print all the values in order from low to high
     # Hint:  Use a recursive, depth first traversal
     def in_order_print(self):
-        pass
+        if self is None:
+            return
+        if self.left:
+            self.left.in_order_print()
+        print(self.value)
+        if self.right:
+            self.right.in_order_print()
+
 
     # Print the value of every node, starting with the given node,
     # in an iterative breadth first traversal
     def bft_print(self):
+        # cur_node??????
+        # create a queue for nodes
+        # add first node to queue
+        # while queue is not empty
+            # remove the first node from the queue
+            # print the removed node
+            # add all children (of removed node) into the queue
+
+
         pass
 
     # Print the value of every node, starting with the given node,
     # in an iterative depth first traversal
     def dft_print(self):
+        # create a stack
+        # use same pattern as print_in_order but use the created stack instead of recursion
+        # push some initial value(s) onto the stack 
+            # push right, root, left, so that the left gets popped last
+        # while stack is not empty
+            # pop
+            # print
+            # push
+        # done when stack is empty
         pass
 
     # Stretch Goals -------------------------
@@ -107,9 +165,12 @@ bst.insert(6)
 bst.insert(3)
 bst.insert(4)
 bst.insert(2)
+# print(bst.in_order_print())
+# print(bst.delete(2))
+# print(bst.delete(222))
 
-bst.bft_print()
-bst.dft_print()
+# bst.bft_print()
+# bst.dft_print()
 
 # print("elegant methods")
 # print("pre order")
