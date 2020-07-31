@@ -142,12 +142,48 @@ class BSTNode:
             if current.left:
                 stack.push(current.left)
 
+        # # create a stack
+        # stack = []
+        # # push some itnitial value(s) onto the stack
+        # stack.append(bst)
+        # while len(stack) > 0:
+        #     # pop Node of top of stack to traverse it's left and right children
+        #     current = stack.pop()
+        #     print(current.value)
+        #     if current.left:
+        #         stack.append(current.left)
+        #     if current.right:
+        #         stack.append(current.right)
+
+
     # Stretch Goals -------------------------
     # Note: Research may be required
+
+    # PRE ORDER mark it before you call on the children
+        # 0. base case: if the node is None, return
+        # 1. Mark the node as visited 
+        # 2. Call dft on left
+        # 3. Call dft on right
+        # return
+
+    # In ORDER
+        # 0. base case: if the node is None, return
+        # 1. Call dft on left
+        # 2. Mark node as visited 
+        # 3. Call dft on right
+        # return
+
+    # POST ORDER
+        # 0. base case: if the node is None, return
+        # 1. Call dft on the left
+        # 2. Call dft on the right
+        # 3. Mark the node as visited 
+        # return
 
     # Print Pre-order recursive DFT
     def pre_order_dft(self, bst):
         while bst is not None:
+            # prints root, then all of the left children first WHY IS THIS "PRE" ORDER
             # if there is a left child, run dft_print on that left child
             if self.left:
                 return self.left.dft_print(self) 
@@ -158,7 +194,6 @@ class BSTNode:
     # Print Post-order recursive DFT
     def post_order_dft(self, bst):
         if bst: 
-    
             # run post_order_dft on the left child 
             self.post_order_dft(bst.left) 
     
@@ -174,17 +209,19 @@ This code is necessary for testing the `print` methods
 bst = BSTNode(1)
 
 bst.insert(8)
-bst.insert(5)
+bst.insert(9)
 bst.insert(7)
 bst.insert(6)
 bst.insert(3)
 bst.insert(4)
 bst.insert(2)
 
+print('INSERT ORDER: 1 -> 8 -> 9 -> 7 -> 6 -> -> 3 -> 4 -> 2')
+print('INSERT ORDER: \n      1\n       \ \n        8\n       /\n      5\n     /\ \n    3  7\n   / \n  2\n /\ \n4  6')
 print("elegant methods")
 print("pre order")
 bst.pre_order_dft(bst)
-print("in order")
-bst.in_order_print()
+# print("in order")
+# bst.in_order_print()
 print("post order")
 bst.post_order_dft(bst)  
